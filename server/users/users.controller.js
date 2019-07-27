@@ -4,7 +4,7 @@ const Util = require('./users.util');
 const getAll = async (req, res) => {
   try {
     const users = await User.find();
-    if (users) {
+    if (users && users.length !== 0) {
       res.status(200).json(users);
     } else {
       res.status(404).json(Util.notFoundError);
