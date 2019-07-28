@@ -7,6 +7,7 @@ exports.up = function (knex) {
     tbl.string('lastname', 128).notNullable();
     tbl.string('email', 255).unique().notNullable();
     tbl.string('password').notNullable();
+    tbl.timestamp('joined_at').defaultTo(knex.fn.now());
   });
 };
 
