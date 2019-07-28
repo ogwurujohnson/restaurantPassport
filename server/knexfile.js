@@ -1,5 +1,5 @@
 // Update with your config settings.
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 const dbUrl = process.env.DB_URL;
 module.exports = {
