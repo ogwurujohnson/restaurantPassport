@@ -1,5 +1,5 @@
 const app = require('../api/api.js');
-const log = require('../utils/winston.js');
+const log = require('../utils').winston;
 
 require('dotenv').config();
 
