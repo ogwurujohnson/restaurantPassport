@@ -1,0 +1,9 @@
+const app = require('../api/api.js');
+const log = require('../utils/winston.js');
+
+require('dotenv').config();
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  log.info(`*** Application live on ${port} ***`)
+});
