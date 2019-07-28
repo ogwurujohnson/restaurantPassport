@@ -3,22 +3,31 @@
   "version": "1.0.0",
   "description": "a restaurant directory, an AirBnB of restaurants. Review, rate and book a restaurant",
   "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./server/bin/www",
+    "start": "nodemon ./server/bin/www"
+  },
   "repository": "https://github.com/ogwurujohnson/restaurantPassport.git",
   "author": "Johnson Ogwuru <ogwurujohnson@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "helmet": "^3.20.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.1",
+    "logger": "^0.0.1",
+    "morgan": "^1.9.1",
     "pg": "^7.12.0",
-    "sqlite": "^3.0.3"
+    "sqlite": "^3.0.3",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.1"
   }
 }
