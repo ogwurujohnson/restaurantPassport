@@ -1,12 +1,13 @@
 // Update with your config settings.
 require('dotenv').config({ path: '../.env' });
+const path = require('path');
 
 const dbUrl = process.env.DB_URL;
 module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './database/restaurant.db3',
+      filename: path.resolve(__dirname, './database/restaurant.db3'),
     },
     useNullAsDefault: true,
     pool: {
@@ -15,17 +16,17 @@ module.exports = {
       },
     },
     migrations: {
-      directory: './database/migrations',
+      directory: path.resolve(__dirname, './database/migrations'),
     },
     seeds: {
-      directory: './database/seeds',
+      directory: path.resolve(__dirname, './database/seeds'),
     },
   },
 
   testing: {
     client: 'sqlite3',
     connection: {
-      filename: './database/restaurant-test.db3',
+      filename: path.resolve(__dirname, './database/restaurant-test.db3'),
     },
     useNullAsDefault: true,
     pool: {
@@ -34,10 +35,10 @@ module.exports = {
       },
     },
     migrations: {
-      directory: './database/migrations',
+      directory: path.resolve(__dirname, './database/migrations'),
     },
     seeds: {
-      directory: './database/seeds',
+      directory: path.resolve(__dirname, './database/seeds'),
     },
   },
 
@@ -49,10 +50,10 @@ module.exports = {
       max: 10,
     },
     migrations: {
-      directory: './database/migrations',
+      directory: path.resolve(__dirname, './database/migrations'),
     },
     seeds: {
-      directory: './database/seeds',
+      directory: path.resolve(__dirname, './database/seeds'),
     },
   },
 };
