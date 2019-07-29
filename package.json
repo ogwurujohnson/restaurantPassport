@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./server/bin/www",
-    "start": "nodemon ./server/bin/www"
+    "start": "node ./server/bin/www"
   },
   "repository": "https://github.com/ogwurujohnson/restaurantPassport.git",
   "author": "Johnson Ogwuru <ogwurujohnson@gmail.com>",
