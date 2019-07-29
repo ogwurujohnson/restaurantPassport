@@ -8,7 +8,7 @@ const userRoute = require('../users/users.route');
 const restaurantRoute = require('../restaurants/restaurants.route');
 const blackListRoute = require('../blacklisting/blacklist.route');
 const visitedRoute = require('../visits/visits.router');
-const reviewROute = require('../reviews/reviews.route');
+const reviewRoute = require('../reviews/reviews.route');
 
 
 const app = express();
@@ -22,7 +22,7 @@ app.use('/api/v1/users', userRoute);
 app.use('/api/v1/restaurants', restaurantRoute);
 app.use('/api/v1/blacklists', blackListRoute);
 app.use('/api/v1/visits', visitedRoute);
-app.use('/api/v1/reviews', reviewROute);
+app.use('/api/v1/reviews', reviewRoute);
 
 
 app.get('/', (req, res) => {
