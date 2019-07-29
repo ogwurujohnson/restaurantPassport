@@ -18,7 +18,7 @@ app.use(cors());
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/restaurants', restaurantRoute);
-app.use('/api/v1/blacklist', blackListRoute);
+app.use('/api/v1/blacklists', blackListRoute);
 
 
 app.get('/', (req, res) => {
