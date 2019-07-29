@@ -5,7 +5,7 @@ const db = require('../database/dbConfig');
 const find = async () => {
   try {
     const restaurants = await db('restaurants AS r')
-      .select('r.id', 'r.name', 'r.description')
+      .select('r.id', 'r.name', 'r.description', 'r.image', 'r.city')
       .count('rv.ratings AS no_of_reviews')
       .sum('rv.ratings AS sum')
       .leftJoin('reviews as rv', 'r.id', 'rv.restaurant_id')
