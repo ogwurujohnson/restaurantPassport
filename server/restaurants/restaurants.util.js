@@ -8,6 +8,7 @@ const customErrors = data => ({
 });
 
 const serverErrors = err => ({
+  status: 500,
   message: err.message,
   stack: err.stack,
 });
