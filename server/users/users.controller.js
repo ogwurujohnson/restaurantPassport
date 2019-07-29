@@ -32,12 +32,13 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      firstname, lastname, email,
+      firstname, lastname, email, city,
     } = req.body;
     const credentials = {
       firstname,
       lastname,
       email,
+      city,
     };
     const user = await User.update(id, credentials);
     if (user) {

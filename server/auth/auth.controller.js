@@ -4,13 +4,14 @@ const Util = require('./auth.utils');
 const register = async (req, res) => {
   try {
     const {
-      firstname, lastname, email, password,
+      firstname, lastname, email, password, city,
     } = req.body;
     const credentials = {
       firstname,
       lastname,
       email,
       password: Util.hashPassword(password),
+      city,
       role: 'user',
     };
     const user = await Auth.createUser(credentials);
