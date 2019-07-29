@@ -11,7 +11,7 @@ const register = async (req, res) => {
       lastname,
       email,
       password: Util.hashPassword(password),
-      city,
+      city: city.toLowerCase(),
       role: 'user',
     };
     const user = await Auth.createUser(credentials);
