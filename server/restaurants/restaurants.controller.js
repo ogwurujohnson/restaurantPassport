@@ -3,10 +3,11 @@ const Util = require('./restaurants.util');
 
 const create = async (req, res) => {
   try {
-    const { name, description } = req.body;
+    const { name, description, image } = req.body;
     const restaurantData = {
       name,
       description,
+      image,
     };
     const restaurant = await Restaurant.create(restaurantData);
     if (restaurant) {

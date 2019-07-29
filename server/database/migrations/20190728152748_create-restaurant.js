@@ -5,6 +5,7 @@ exports.up = function (knex) {
     tbl.increments();
     tbl.string('name', 255).notNullable();
     tbl.string('description').nullable();
+    tbl.string('image').notNullable();
     tbl.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
