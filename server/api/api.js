@@ -4,7 +4,7 @@ const cors = require('cors');
 const logger = require('morgan');
 
 const authRoute = require('../auth/auth.route');
-
+const userRoute = require('../users/users.route');
 
 const app = express();
 app.use(express.json());
@@ -13,6 +13,7 @@ app.use(logger('dev'));
 app.use(cors());
 
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/users', userRoute);
 
 app.get('/', (req, res) => {
   res.status(200).json({
