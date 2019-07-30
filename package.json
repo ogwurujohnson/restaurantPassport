@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon ./server/bin/www",
     "start": "node ./server/bin/www",
-    "test": "cross-env DB_ENV=testing jest --watch --verbose"
+    "test": "cross-env DB_ENV=testing jest --watch --verbose  --coverage",
+    "test:coverage": "jest --coverage --colors"
   },
   "repository": "https://github.com/ogwurujohnson/restaurantPassport.git",
   "author": "Johnson Ogwuru <ogwurujohnson@gmail.com>",
