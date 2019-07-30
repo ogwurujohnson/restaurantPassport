@@ -30,9 +30,20 @@ const findBy = (filter) => {
   }
 };
 
+const findById = (id) => {
+  try {
+    return db('reviews')
+      .where({ id })
+      .first();
+  } catch (err) {
+    log.info(err.message);
+  }
+};
+
 
 module.exports = {
   add,
   remove,
   findBy,
+  findById,
 };
