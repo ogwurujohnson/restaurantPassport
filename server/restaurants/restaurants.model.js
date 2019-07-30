@@ -19,19 +19,31 @@ const find = async () => {
   }
 };
 
-const findByCity = async (city) => {
+
+const findByCity = async (user, city) => {
   try {
+    const blacklist = await db('blacklist AS b').select('b.restaurant_id').where({ 'b.user_id': user });
+    const blacklistRestuarants = [];
+    blacklist.map((item) => {
+      return blacklistRestuarants.push(item.restaurant_id);
+    });
     const restaurants = await db('restaurants AS r')
       .select('r.id', 'r.name', 'r.description', 'r.image', 'r.city')
       .count('rv.ratings AS no_of_reviews')
       .sum('rv.ratings AS sum')
       .leftJoin('reviews as rv', 'r.id', 'rv.restaurant_id')
+      .leftJoin('blacklist as b', 'r.id', 'b.restaurant_id')
       .groupBy('r.id')
       .where({ 'r.city': city });
-    return restaurants.map(restaurant => ({
+
+
+    const restuarantArray = restaurants.map(restaurant => ({
       ...restaurant,
       avgRating: parseInt(restaurant.sum / restaurant.no_of_reviews, 10),
     }));
+    return restuarantArray.filter(
+      rest => blacklistRestuarants.includes(rest.id) === false,
+    );
   } catch (err) {
     log.info(err.message);
   }

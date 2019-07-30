@@ -38,8 +38,8 @@ const getAll = async (req, res) => {
 
 const getAllByCity = async (req, res) => {
   try {
-    const { city } = req.query;
-    const restaurants = await Restaurant.findByCity(city);
+    const { user, city } = req.query;
+    const restaurants = await Restaurant.findByCity(user, city);
     if (restaurants && restaurants.length !== 0) {
       res.status(200).json(restaurants);
     } else {
