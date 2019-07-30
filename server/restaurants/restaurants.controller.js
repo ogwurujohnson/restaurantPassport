@@ -10,7 +10,7 @@ const create = async (req, res) => {
       name,
       description,
       image,
-      city,
+      city: city.toLowerCase(),
     };
     const restaurant = await Restaurant.create(restaurantData);
     if (restaurant) {
@@ -26,6 +26,20 @@ const create = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const restaurants = await Restaurant.find();
+    if (restaurants && restaurants.length !== 0) {
+      res.status(200).json(restaurants);
+    } else {
+      res.status(404).json(Util.notFoundError);
+    }
+  } catch (err) {
+    res.status(500).json(Util.serverErrors(err));
+  }
+};
+
+const getAllByCity = async (req, res) => {
+  try {
+    const { user, city } = req.query;
+    const restaurants = await Restaurant.findByCity(user, city);
     if (restaurants && restaurants.length !== 0) {
       res.status(200).json(restaurants);
     } else {
@@ -83,6 +97,7 @@ const deleteRestaurant = async (req, res) => {
 module.exports = {
   create,
   getAll,
+  getAllByCity,
   getSingle,
   update,
   deleteRestaurant,
