@@ -23,10 +23,11 @@ const find = async () => {
 const findByCity = async (user, city) => {
   try {
     const blacklist = await db('blacklist AS b').select('b.restaurant_id').where({ 'b.user_id': user });
+
     const blacklistRestuarants = [];
-    blacklist.map((item) => {
-      return blacklistRestuarants.push(item.restaurant_id);
-    });
+
+    blacklist.map(item => blacklistRestuarants.push(item.restaurant_id));
+
     const restaurants = await db('restaurants AS r')
       .select('r.id', 'r.name', 'r.description', 'r.image', 'r.city')
       .count('rv.ratings AS no_of_reviews')
@@ -41,6 +42,8 @@ const findByCity = async (user, city) => {
       ...restaurant,
       avgRating: parseInt(restaurant.sum / restaurant.no_of_reviews, 10),
     }));
+
+
     return restuarantArray.filter(
       rest => blacklistRestuarants.includes(rest.id) === false,
     );
