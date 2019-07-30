@@ -9,6 +9,10 @@ afterEach(async () => {
   await db('users').truncate();
 });
 
+afterAll(async () => {
+  await db('users').truncate();
+});
+
 const dummyUser = {
   firstname: 'Johnson',
   lastname: 'Ogwuruu',
