@@ -1,4 +1,6 @@
 const Blacklist = require('./blacklist.model');
+const User = require('../users/users.model');
+const Restaurant = require('../restaurants/restaurants.model');
 
 async function validateBlackListId(req, res, next) {
   const { id } = req.params;
@@ -38,7 +40,14 @@ async function validateUserId(req, res, next) {
       error: 'Please provide a valid id query parameter',
     });
   }
-  return next();
+  const user = await User.findById(integerNum);
+  if (user) {
+    return next();
+  }
+  return res.status(404).json({
+    status: 404,
+    error: 'User not found',
+  });
 }
 
 async function validateRestaurantId(req, res, next) {
@@ -55,7 +64,14 @@ async function validateRestaurantId(req, res, next) {
       error: 'Please provide a valid id query parameter',
     });
   }
-  return next();
+  const restaurant = await Restaurant.findById(integerNum);
+  if (restaurant) {
+    return next();
+  }
+  return res.status(404).json({
+    status: 404,
+    error: 'Restaurant not found',
+  });
 }
 
 
