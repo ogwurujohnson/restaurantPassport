@@ -9,6 +9,7 @@ const hashPassword = password => bcrypt.hashSync(password, 12);
 const comparePassword = (plain, hased) => bcrypt.compareSync(plain, hased);
 
 const unAuthorizedMessage = {
+  status: 401,
   message: 'Username or password mismatch',
 };
 

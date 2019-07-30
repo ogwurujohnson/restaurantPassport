@@ -40,7 +40,7 @@ const login = async (req, res) => {
         token,
       });
     } else {
-      res.status(403).json(Util.unAuthorizedMessage);
+      res.status(401).json(Util.unAuthorizedMessage);
     }
   } catch (err) {
     const error = {
