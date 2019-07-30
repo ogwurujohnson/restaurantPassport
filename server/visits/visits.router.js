@@ -4,11 +4,12 @@ const {
   getusersVisited,
   removeFromvisited,
 } = require('./visit.controller');
+const { authenticate } = require('../auth/authenticate.util');
 
 const route = express.Router();
 
-route.post('/:userId/:restaurantId', addToVisited);
-route.delete('/:id', removeFromvisited);
-route.get('/:userId', getusersVisited);
+route.post('/:userId/:restaurantId', authenticate, addToVisited);
+route.delete('/:id', authenticate, removeFromvisited);
+route.get('/:userId', authenticate, getusersVisited);
 
 module.exports = route;
