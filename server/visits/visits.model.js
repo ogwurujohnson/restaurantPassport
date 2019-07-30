@@ -30,6 +30,16 @@ const findBy = (filter) => {
   }
 };
 
+const findById = (id) => {
+  try {
+    return db('visited')
+      .where({ id })
+      .first();
+  } catch (err) {
+    log.info(err.message);
+  }
+};
+
 const getVisited = async (id) => {
   try {
     const visits = await db('visited AS v')
@@ -50,4 +60,5 @@ module.exports = {
   remove,
   getVisited,
   findBy,
+  findById,
 };

@@ -11,6 +11,16 @@ const add = (data) => {
   }
 };
 
+const findById = (id) => {
+  try {
+    return db('blacklist')
+      .where({ id })
+      .first();
+  } catch (err) {
+    log.info(err.message);
+  }
+};
+
 const remove = (id) => {
   try {
     return db('blacklist').where({ id }).del();
@@ -42,4 +52,5 @@ module.exports = {
   remove,
   getBlacklist,
   findBy,
+  findById,
 };
