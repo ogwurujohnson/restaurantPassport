@@ -24,8 +24,9 @@ const findById = (id) => {
 
 const createUser = async (data) => {
   try {
-    const [id] = await db('users').insert(data);
-    return findById(id);
+    return await db('users').insert(data)
+      .then(([id]) => findById(id));
+    // const [id] = await db('users').insert(data);
   } catch (err) {
     log.info(err.message);
   }
