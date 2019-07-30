@@ -77,7 +77,7 @@ const findById = async (id) => {
 
 const create = async (data) => {
   try {
-    const [id] = await db('restaurants').insert(data);
+    const [id] = await db('restaurants').insert(data).returning('id');
     return findById(id);
   } catch (err) {
     log.info(err.message);
