@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./server/bin/www",
-    "start": "node ./server/bin/www"
+    "start": "node ./server/bin/www",
+    "test": "cross-env DB_ENV=testing jest --watch --verbose  --coverage",
+    "test:coverage": "jest --coverage --colors"
   },
   "repository": "https://github.com/ogwurujohnson/restaurantPassport.git",
   "author": "Johnson Ogwuru <ogwurujohnson@gmail.com>",
@@ -25,9 +27,12 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.1"
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }

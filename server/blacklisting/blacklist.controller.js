@@ -42,7 +42,7 @@ const removeFromBlackList = async (req, res) => {
     const { id } = req.params;
     await BlackList.remove(id);
     res
-      .status(201)
+      .status(200)
       .json(Util.customErrors('restaurant, removed', 'successfully'));
   } catch (err) {
     res.status(500).json(Util.serverErrors(err));
