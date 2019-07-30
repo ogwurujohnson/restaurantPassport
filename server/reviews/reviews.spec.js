@@ -68,13 +68,14 @@ describe('Reviews endpoints work', () => {
       .expect(201);
   });
 
-  it('/POST returns 409', async () => {
+  it('/POST Reviews returns 409', async () => {
     await db('users').truncate();
     await db('users').insert(dummyUser2);
     await db('restaurants').insert(restaurantData);
     return request(server)
       .post('/api/v1/reviews/1/1')
       .set('authorization', token)
+      .send({ ratings: '2.0', reviews: 'hello' })
       .expect(409);
   });
 
@@ -88,7 +89,7 @@ describe('Reviews endpoints work', () => {
       .expect(400);
   });
 
-  it('/POST returns 401', () => request(server)
+  it('/POST returns 401 if unauthorized', () => request(server)
     .post('/api/v1/reviews/1/1')
     .expect(401));
 
