@@ -14,8 +14,15 @@ const register = async (req, res) => {
       city: city.toLowerCase(),
       role: 'user',
     };
-    const user = await Auth.createUser(credentials);
-    res.status(201).json(user);
+    const user = await Auth.findBy({ email: credentials.email });
+    if (user) {
+      res.status(409).json({
+        message: 'user already exists',
+      });
+    } else {
+      const newUser = await Auth.createUser(credentials);
+      res.status(201).json(newUser);
+    }
   } catch (err) {
     const error = {
       message: err.message,
