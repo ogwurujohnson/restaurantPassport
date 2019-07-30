@@ -5,6 +5,7 @@ const db = require('../database/dbConfig');
 beforeEach(async () => {
   await db('users').truncate();
 });
+
 afterEach(async () => {
   await db('users').truncate();
 });
@@ -74,13 +75,15 @@ describe('test register endpoints', () => {
 });
 
 describe('test login endpoints', () => {
-  beforeEach(() => request(server)
-    .post('/api/v1/auth/register')
-    .send(dummyUser));
-  it('returns 200 if successful', async () => request(server)
-    .post('/api/v1/auth/login')
-    .send(loginData)
-    .expect(200));
+  it('returns 200 if successful', async () => {
+    await request(server)
+      .post('/api/v1/auth/register')
+      .send(dummyUser);
+    await request(server)
+      .post('/api/v1/auth/login')
+      .send(loginData)
+      .expect(200);
+  });
   it('returns 401 if unsuccessful', async () => request(server)
     .post('/api/v1/auth/login')
     .send(fakeLoginData)

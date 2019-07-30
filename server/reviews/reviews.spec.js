@@ -5,7 +5,7 @@ const db = require('../database/dbConfig');
 const dummyUser = {
   firstname: 'Johnson',
   lastname: 'Ogwuru',
-  email: 'ogwurujohnson3@gmail.com',
+  email: 'ogwurujohnson1@gmail.com',
   password: 'Johnny55',
   city: 'Enugu',
   role: 'user',
@@ -28,7 +28,7 @@ const restaurantData = {
 };
 
 const loginData = {
-  email: 'ogwurujohnson3@gmail.com',
+  email: 'ogwurujohnson1@gmail.com',
   password: 'Johnny55',
 };
 
@@ -56,34 +56,28 @@ afterAll(async () => {
   await db('users').truncate();
 });
 
+afterEach(async () => {
+  await db('users').truncate();
+});
+
 
 describe('Reviews endpoints work', () => {
   it('/POST returns 201', async () => {
+    await db('users').truncate();
     await db('users').insert(dummyUser2);
     await db('restaurants').insert(restaurantData);
-    return request(server)
+    await request(server)
       .post('/api/v1/reviews/1/1')
       .set('authorization', token)
       .send({ ratings: '2.0', reviews: 'hello' })
       .expect(201);
   });
 
-  it('/POST Reviews returns 409', async () => {
-    await db('users').truncate();
-    await db('users').insert(dummyUser2);
-    await db('restaurants').insert(restaurantData);
-    return request(server)
-      .post('/api/v1/reviews/1/1')
-      .set('authorization', token)
-      .send({ ratings: '2.0', reviews: 'hello' })
-      .expect(409);
-  });
-
   it('/POST returns 400 if error in url', async () => {
     await db('users').truncate();
     await db('users').insert(dummyUser2);
     await db('restaurants').insert(restaurantData);
-    return request(server)
+    await request(server)
       .post('/api/v1/reviews/1mm/1')
       .set('authorization', token)
       .expect(400);
@@ -97,7 +91,7 @@ describe('Reviews endpoints work', () => {
     await db('users').truncate();
     await db('users').insert(dummyUser2);
     await db('restaurants').insert(restaurantData);
-    return request(server)
+    await request(server)
       .delete('/api/v1/reviews/1')
       .set('authorization', token)
       .expect(200);
@@ -107,7 +101,7 @@ describe('Reviews endpoints work', () => {
     await db('users').truncate();
     await db('users').insert(dummyUser2);
     await db('restaurants').insert(restaurantData);
-    return request(server)
+    await request(server)
       .delete('/api/v1/reviews/1mm')
       .set('authorization', token)
       .expect(400);
