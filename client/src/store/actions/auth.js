@@ -27,7 +27,7 @@ export const login = (url, credentials) => dispatch => {
   axios
     .post(url, credentials)
     .then(res => {
-      dispatch({ type: LOGIN_SUCCESS, message: 'login successful', payload: res.data.token })
+      dispatch({ type: LOGIN_SUCCESS, message: 'login successful', payload: res.data.token, userdata: res.data.user })
       console.log(res);
     })
     .catch(err => {
