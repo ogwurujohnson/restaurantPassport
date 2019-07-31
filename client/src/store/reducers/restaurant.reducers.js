@@ -30,7 +30,7 @@ const initialState = {
   message: ""
 };
 
-export const authReducers = (state = initialState, action) => {
+export const restaurantReducers = (state = initialState, action) => {
   switch (action.type) {
     case CREATING_REVIEW:
       return {

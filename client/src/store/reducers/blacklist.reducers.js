@@ -1,13 +1,13 @@
 import {
-  GET_VISITS,
-  GET_VISIT_ERROR,
-  CREATING_VISITS,
-  DELETING_VISITS,
-  FETCHING_VISITS
+  GET_BLACKLISTS,
+  GET_BLACKLIST_ERROR,
+  CREATING_BLACKLIST,
+  DELETING_BLACKLIST,
+  FETCHING_BLACKLIST
 } from "../actions/action.types";
 
 const initialState = {
-  visits: [],
+  blacklists: [],
   creating: false,
   fetching: false,
   deleting: false,
@@ -16,36 +16,36 @@ const initialState = {
   message: ""
 };
 
-export const authReducers = (state = initialState, action) => {
+export const blacklistReducers = (state = initialState, action) => {
   switch (action.type) {
-    case CREATING_VISITS:
+    case CREATING_BLACKLIST:
       return {
         ...state,
         creating: true
       };
-    case FETCHING_VISITS:
+    case FETCHING_BLACKLIST:
       return {
         ...state,
         fetching: true
       };
-    case DELETING_VISITS:
+    case DELETING_BLACKLIST:
       return {
         ...state,
         deleting: true
       };
-    case GET_VISITS:
+    case GET_BLACKLISTS:
       return {
         ...state,
         fetching: false,
         creating: false,
         deleting: false,
-        visits: action.payload,
+        blacklists: action.payload,
         message: action.message,
         error: false,
         success: true,
         
       };
-    case GET_VISIT_ERROR:
+    case GET_BLACKLIST_ERROR:
       return {
         ...state,
         fetching: false,
