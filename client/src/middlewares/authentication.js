@@ -1,8 +1,8 @@
-import {SIGN_UP_SUCCESS, LOGIN_SUCCESS, NO_AUTH} from '../store/actions/actionTypes';
-import {set, removeItem} from '../utils/localStorage';
+import {CREATE_USER, LOGIN_SUCCESS, NO_AUTH} from '../store/actions/action.types';
+import {set, removeItem} from '../utils/localStorage.js';
 
 export const setToken = store => next => action => {
-    if(action.type === SIGN_UP_SUCCESS || action.type === LOGIN_SUCCESS) {
+    if(action.type === CREATE_USER || action.type === LOGIN_SUCCESS) {
         set('hashedToken', action.payload);
     }
     next(action);
