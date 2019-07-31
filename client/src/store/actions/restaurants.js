@@ -15,19 +15,20 @@ import {
 } from "../actions/action.types";
 
 export const addRestaurant = (url, data) => dispatch => {
+  dispatch({ type: CREATING_RESTAURANT })
   axiosPump()
     .post(url, data)
     .then(res => {
-      console.log(res);
+      dispatch({ type: CREATE_RESTAURANT, payload: res.data, message: 'creation successful' })
     })
     .catch(err => {
-      console.log(err);
+      dispatch({ type: CREATE_RESTAURANT_ERROR, message: 'creation failed' })
     });
 };
 
 export const getRestaurant = url => dispatch => {
   dispatch({ type: FETCHING_RESTAURANT })
-  axiosPump()
+  return axiosPump()
     .get(url)
     .then(res => {
       dispatch({ type: GET_RESTAURANTS, payload: res.data, message: 'fetching successful' });
@@ -39,7 +40,7 @@ export const getRestaurant = url => dispatch => {
 
 export const getCityRestaurant = url => dispatch => {
   dispatch({ type: FETCHING_RESTAURANT })
-  axiosPump()
+  return axiosPump()
     .get(url)
     .then(res => {
       dispatch({ type: GET_RESTAURANTS, payload: res.data, message: 'fetching successful' });
