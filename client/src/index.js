@@ -8,11 +8,12 @@ import { Provider } from "react-redux";
 import rootReducer from "./store/reducers/index";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
+import { setToken } from './middlewares/authentication';
 
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk, logger),
+    applyMiddleware(thunk, setToken, logger),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
