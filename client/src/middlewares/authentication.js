@@ -3,7 +3,7 @@ import {set, removeItem} from '../utils/localStorage.js';
 
 export const setToken = store => next => action => {
     if(action.type === CREATE_USER || action.type === LOGIN_SUCCESS) {
-        set('hashedToken', action.payload);
+        set('token', action.payload);
     }
     next(action);
 }
