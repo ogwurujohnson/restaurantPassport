@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { getRestaurant } from '../store/actions/restaurants';
 import { baseUrl } from '../utils/url';
 import SingleRestaurant from '../components/SingleRestaurant';
+import BlackList from './BlackList';
+import Visits from './Visits';
 
 class Restaurants extends Component {
   state = {
     restaurants: []
   }
-  componentDidMount() {
+  componentWillMount() {
     this.getRestaurant();
   }
 
@@ -25,6 +27,8 @@ class Restaurants extends Component {
         {this.state.restaurants.length !==0 ? this.state.restaurants.map((restaurant) => {
           return <SingleRestaurant key={restaurant.id} restaurant={restaurant} />
         }) : <p>Nothing here</p>}
+        <BlackList />
+        <Visits />
       </div>
     )
   }
