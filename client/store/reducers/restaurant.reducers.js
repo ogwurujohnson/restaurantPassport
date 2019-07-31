@@ -10,7 +10,13 @@ import {
   CREATE_RESTAURANT_ERROR,
   DELETE_RESTAURANT_ERROR,
   EDIT_RESTAURANT_ERROR,
-  GET_RESTAURANTS_ERROR
+  GET_RESTAURANTS_ERROR,
+  CREATE_REVIEW,
+  DELETE_REVIEW,
+  CREATING_REVIEW,
+  DELETING_REVIEW,
+  CREATE_ERROR_REVIEW,
+  DELETE_ERROR_REVIEW
 } from "../actions/action.types";
 
 const initialState = {
@@ -26,6 +32,16 @@ const initialState = {
 
 export const authReducers = (state = initialState, action) => {
   switch (action.type) {
+    case CREATING_REVIEW:
+      return {
+        ...state,
+        creating: true
+      };
+    case DELETING_REVIEW:
+      return {
+        ...state,
+        deleting: true
+      };
     case CREATING_RESTAURANT:
       return {
         ...state,
@@ -54,6 +70,38 @@ export const authReducers = (state = initialState, action) => {
         message: action.message,
         error: false,
         success: true
+      };
+    case CREATE_REVIEW:
+      return {
+        ...state,
+        creating: false,
+        message: action.message,
+        error: false,
+        success: true
+      };
+    case DELETE_REVIEW:
+      return {
+        ...state,
+        deleting: false,
+        message: action.message,
+        error: false,
+        success: true
+      };
+    case CREATE_ERROR_REVIEW:
+      return {
+        ...state,
+        creating: false,
+        message: action.message,
+        error: true,
+        success: false
+      };
+    case DELETE_ERROR_REVIEW:
+      return {
+        ...state,
+        deleting: false,
+        message: action.message,
+        error: true,
+        success: false
       };
     case CREATE_RESTAURANT_ERROR:
       return {
@@ -97,23 +145,23 @@ export const authReducers = (state = initialState, action) => {
         error: true,
         success: false
       };
-      case GET_RESTAURANTS:
-          return {
-            ...state,
-            fetching: false,
-            restaurants: action.payload,
-            message: action.message,
-            error: false,
-            success: true
-          };
-        case GET_RESTAURANTS_ERROR:
-          return {
-            ...state,
-            fetching: false,
-            message: action.message,
-            error: true,
-            success: false
-          };
+    case GET_RESTAURANTS:
+      return {
+        ...state,
+        fetching: false,
+        restaurants: action.payload,
+        message: action.message,
+        error: false,
+        success: true
+      };
+    case GET_RESTAURANTS_ERROR:
+      return {
+        ...state,
+        fetching: false,
+        message: action.message,
+        error: true,
+        success: false
+      };
     default:
       return state;
   }
