@@ -1,0 +1,1 @@
+export const baseUrl = 'https://restaurant-review-api.herokuapp.com/api/v1';

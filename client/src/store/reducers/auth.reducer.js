@@ -75,7 +75,6 @@ export const authReducers = (state = initialState, action) => {
       return {
         ...state,
         creating: false,
-        users: action.payload,
         message: action.message,
         error: false,
         success: true
