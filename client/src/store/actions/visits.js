@@ -21,7 +21,7 @@ export const getVisits = (url) => dispatch => {
 }
 
 export const removeFromVisits = (url) => dispatch => {
-  axiosPump().get(url)
+  axiosPump().delete(url)
     .then((res) => {
       console.log(res);
     })

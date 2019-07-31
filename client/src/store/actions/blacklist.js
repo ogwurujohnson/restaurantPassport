@@ -21,7 +21,7 @@ export const getBlacklists = (url) => dispatch => {
 }
 
 export const removeFromBlackList = (url) => dispatch => {
-  axiosPump().get(url)
+  axiosPump().delete(url)
     .then((res) => {
       console.log(res);
     })
