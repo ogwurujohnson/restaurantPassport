@@ -5,23 +5,29 @@ import { baseUrl } from '../utils/url';
 import SingleRestaurant from '../components/SingleRestaurant';
 
 class Passport extends Component {
+  state = {
+    restaurants: []
+  }
+
   componentDidMount() {
     this.getRestaurant();
   }
 
-  getRestaurant  = () => {
+  getRestaurant  = async () => {
     const userData = localStorage.getItem('user');
     const user = JSON.parse(userData);
     const city = user.city;
     const  userId = user.id;
     const url = `${baseUrl}/restaurants/passport?city=${city}&&user=${userId}`;
-    this.props.getCityRestaurant(url);
+    await this.props.getCityRestaurant(url).then(() => {
+      this.setState({ restaurants: this.props.restaurants })
+    });
   }
   
   render() {
     return (
       <div>
-        {this.props.restaurants.length !==0 ? this.props.restaurants.map((restaurant) => {
+        {this.state.restaurants.length !==0 ? this.state.restaurants.map((restaurant) => {
           return <SingleRestaurant key={restaurant.id} restaurant={restaurant} />
         }) : <p>Nothing here</p>}
       </div>
