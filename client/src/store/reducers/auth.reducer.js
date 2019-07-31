@@ -10,7 +10,10 @@ import {
   EDITING_USER,
   EDIT_USER_ERROR,
   EDIT_USER,
-  FETCHING_USER
+  FETCHING_USER,
+  LOGIN_IN,
+  LOGIN_ERROR,
+  LOGIN_SUCCESS
 } from "../actions/action.types";
 
 const initialState = {
@@ -21,11 +24,33 @@ const initialState = {
   editing: false,
   error: false,
   success: false,
-  message: ""
+  message: "",
+  loginin: false
 };
 
 export const authReducers = (state = initialState, action) => {
   switch (action.type) {
+    case LOGIN_IN:
+      return {
+        ...state,
+        loginin: true
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loginin: false,
+        success: true,
+        error: false,
+        message: action.message
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        loginin: false,
+        success: false,
+        error: true,
+        message: action.message
+      };
     case CREATING_USER:
       return {
         ...state,
@@ -97,23 +122,23 @@ export const authReducers = (state = initialState, action) => {
         error: true,
         success: false
       };
-      case GET_USERS:
-          return {
-            ...state,
-            fetching: false,
-            users: action.payload,
-            message: action.message,
-            error: false,
-            success: true
-          };
-        case GET_USER_ERROR:
-          return {
-            ...state,
-            fetching: false,
-            message: action.message,
-            error: true,
-            success: false
-          };
+    case GET_USERS:
+      return {
+        ...state,
+        fetching: false,
+        users: action.payload,
+        message: action.message,
+        error: false,
+        success: true
+      };
+    case GET_USER_ERROR:
+      return {
+        ...state,
+        fetching: false,
+        message: action.message,
+        error: true,
+        success: false
+      };
     default:
       return state;
   }
