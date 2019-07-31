@@ -10,6 +10,10 @@ export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
 export const DELETE_USER_ERROR = 'DELETE_USER_ERROR';
 export const EDIT_USER_ERROR = 'EDIT_USER_ERROR';
 export const GET_USER_ERROR = 'GET_USER_ERROR';
+export const LOGIN_IN = 'LOGIN_IN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const NO_AUTH = 'NO_AUTH';
 
 export const CREATE_RESTAURANT = 'CREATE_RESTAURANT';
 export const DELETE_RESTAURANT = 'DELETE_RESTAURANT';
