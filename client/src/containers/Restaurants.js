@@ -46,14 +46,24 @@ class Restaurants extends Component {
                 <p>Pizza</p>
                 <p>Pizza</p>
                 <p>Pizza</p>
-
               </div>
             </div>
           </FilterWrapper>
+          <Gallery>
+            {this.state.restaurants.length !== 0 ? (
+              this.state.restaurants.map(restaurant => {
+                return (
+                  <SingleRestaurant
+                    key={restaurant.id}
+                    restaurant={restaurant}
+                  />
+                );
+              })
+            ) : (
+              <p>Nothing here</p>
+            )}
+          </Gallery>
         </PageContent>
-        {/* {this.state.restaurants.length !==0 ? this.state.restaurants.map((restaurant) => {
-          return <SingleRestaurant key={restaurant.id} restaurant={restaurant} />
-        }) : <p>Nothing here</p>} */}
       </div>
     );
   }
@@ -70,6 +80,14 @@ export default connect(
   { getRestaurant }
 )(Restaurants);
 
+const Gallery = styled.div`
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.0rem;
+  width: 50%;
+`;
+
 const HeaderImage = styled.div`
   img {
     width: 100%;
@@ -78,11 +96,13 @@ const HeaderImage = styled.div`
 `;
 
 const PageContent = styled.div`
+  
   display: flex;
   justify-content: space-between;
 `;
 
 const FilterWrapper = styled.div`
+  flex: .3;
   padding: 1rem;
   display: flex;
   flex-direction: column;
