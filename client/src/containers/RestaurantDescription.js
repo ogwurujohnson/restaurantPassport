@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getRestaurant } from "../store/actions/restaurants";
+import {} from '../store/actions/blacklist';
+import {} from '../store/actions/visits';
 import { baseUrl } from "../utils/url";
 import detailimg from "../assets/detail-banner-1.jpg";
 import styled from "styled-components";
@@ -8,11 +10,29 @@ import intro from "../assets/gallery-1.jpg";
 
 class RestaurantDescription extends Component {
   state = {
-    restaurant: {}
+    restaurant: {},
+    averageRating: "",
+    reviewCount: ""
   };
 
-  componentDidMount() {
-    this.getRestaurant();
+  async componentDidMount() {
+    await this.getRestaurant();
+    const reviewCount = this.state.restaurant.reviews
+      ? this.state.restaurant.reviews.length
+      : 0;
+    let sum = 0;
+    (await this.state.restaurant.reviews.length) !== 0
+      ? this.state.restaurant.reviews.map(review => {
+          sum = Number(review.ratings) + sum;
+        })
+      : (sum = 0);
+    const average = sum / reviewCount;
+    const value = isNaN(average) ? 0 : average;
+    const averageRatings = value.toFixed(1);
+    await this.setState({
+      averageRating: averageRatings,
+      reviewCount: reviewCount
+    });
   }
 
   getRestaurant = async () => {
@@ -25,17 +45,15 @@ class RestaurantDescription extends Component {
   render() {
     return (
       <RestaurantDescriptionWrapper>
-        {/* {this.state.restaurant.name}
-        <h1>hekkk</h1> */}
         <HeaderImage>
           <div className="tags">
             <p className="rest">Restaurant</p>
             <p className="verif">Verified</p>
           </div>
           <div className="shopdetails">
-            <h1>Shop Name</h1>
-            <p>Restaurant City Location: </p>
-            <p>Average Rating: 4.9</p>
+            <h1>{this.state.restaurant.name}</h1>
+            <p>Restaurant City Location: {this.state.restaurant.city} </p>
+            <p>Average Rating: {this.state.averageRating}</p>
           </div>
           <div className="actions">
             <button>Bookmark</button>
@@ -51,30 +69,21 @@ class RestaurantDescription extends Component {
               <p>All Reviews</p>
               <div className="reviews">
                 <div className="notes">
-                  <div className="review-item">
-                    <p>
-                      Quisque aliquet ornare nunc in viverra. Nullam ornare
-                      molestie ligula in luctus. Suspendisse ac cursus elit. In
-                      congue mattis felis, non hendrerit orci dictum id.
-                    </p>
-                    <p>Rating: 4.0</p>
-                  </div>
-                  <div className="review-item">
-                    <p>
-                      Quisque aliquet ornare nunc in viverra. Nullam ornare
-                      molestie ligula in luctus. Suspendisse ac cursus elit. In
-                      congue mattis felis, non hendrerit orci dictum id.
-                    </p>
-                    <p>Rating: 4.0</p>
-                  </div>
-                  <div className="review-item">
-                    <p>
-                      Quisque aliquet ornare nunc in viverra. Nullam ornare
-                      molestie ligula in luctus. Suspendisse ac cursus elit. In
-                      congue mattis felis, non hendrerit orci dictum id.
-                    </p>
-                    <p>Rating: 4.0</p>
-                  </div>
+                  {!this.state.restaurant.reviews ? (
+                    <div>Loading...</div>
+                  ) : (
+                    this.state.restaurant.reviews.map(review => {
+                      return (
+                        <div key={review.id} className="review-item">
+                          <p>
+                            <span>{review.firstname}:</span>
+                            {review.reviews}
+                          </p>
+                          <p>Rating: {review.ratings}</p>
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
               </div>
             </LeftSection>
@@ -85,7 +94,8 @@ class RestaurantDescription extends Component {
                     <span>213</span> people love it{" "}
                   </p>
                   <p>
-                    <span>4.3 / 5</span>from 316 reviews
+                    <span>{this.state.averageRating} / 5.0</span>from{" "}
+                    {this.state.reviewCount} review(s)
                   </p>
                 </div>
                 <div className="divider" />
@@ -101,16 +111,11 @@ class RestaurantDescription extends Component {
                 </div>
                 <div className="description">
                   <p>
-                    Vestibulum a lectus ullamcorper, dapibus ante id, sagittis
-                    libero. In tincidunt nisi venenatis, ornare eros at,
-                    hendrerit sem. Nunc metus purus, porta a dignissim vel,
-                    vulputate sed odio. Aenean est nisi, pulvinar eget velit
-                    quis, placerat hendrerit arcu. Vestibulum non dictum nibh.
-                    In congue mattis felis, non hendrerit orci dictum id. Etiam
-                    consequat nulla vitae tempus interdum.Nam gravida convallis
-                    lacus, at dignissim urna pulvinar sed. Cras ac mi odio.
-                    Aliquam erat volutpat. Cras euismod facilisis ligula in
-                    tristique. Proin et eleifend lacus, vitae dictum orci
+                    {this.state.restaurant.description ? (
+                      this.state.restaurant.description
+                    ) : (
+                      <span>Loading....</span>
+                    )}
                   </p>
                 </div>
               </div>
@@ -279,6 +284,12 @@ const LeftSection = styled.div`
         flex-direction: column;
 
         p {
+          span {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-right: 1rem;
+            color: #25282b;
+          }
           font-size: 1.5rem;
           color: rgba(54, 54, 54, 0.6);
           margin-bottom: 1rem;
@@ -363,6 +374,12 @@ const RightSection = styled.div`
         color: rgba(54, 54, 54, 0.6);
         font-size: 1.3rem;
         line-height: 2.2;
+
+        span {
+          color: rgba(54, 54, 54, 0.6);
+          font-size: 1.3rem;
+          line-height: 2.2;
+        }
       }
     }
   }
