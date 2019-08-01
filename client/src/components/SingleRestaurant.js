@@ -6,20 +6,20 @@ import foodimg from "../assets/food1.jpg";
 export default function SingleRestaurant(props) {
   return (
     <RestaurantWrapper>
-      <div className="image">
-        <img src={foodimg} alt="foodimg" />
-      </div>
+      <Link to={`/restaurants/${props.restaurant.id}`}><div className="image">
+        <img src={props.restaurant.image} alt="foodimg" />
+      </div> </Link>
       <div className="restinfo">
-        <h4>The best Restaurant</h4>
+        <h4>{props.restaurant.name}</h4>
         <div>
-          <p>120 Reviews</p>
-          <p>Avg Rating: 3.0</p>
+          <p>Reviews: {props.restaurant.no_of_reviews}</p>
+          <p>Avg Rating: {props.restaurant.avgRating === null & 0}</p>
         </div>
         <button>Reserve</button>
       </div>
       <div className="summary">
-        <p>Company name</p>
-        <p>City</p>
+        <p>{props.restaurant.name}</p>
+        <p>{props.restaurant.city}</p>
       </div>
       {/* <Link to={`/restaurants/${props.restaurant.id}`}><h1>Name: {props.restaurant.name}</h1></Link>
       <p>Description: {props.restaurant.description}</p> */}
