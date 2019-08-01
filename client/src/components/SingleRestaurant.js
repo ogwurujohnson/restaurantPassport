@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import foodimg from "../assets/food1.jpg";
+import { FaRegStar, FaRegUser, FaMapMarkerAlt, FaRegClipboard } from "react-icons/fa";
 
 let avg;
 export default function SingleRestaurant(props) {
@@ -14,15 +15,15 @@ export default function SingleRestaurant(props) {
       <div className="restinfo">
         <h4>{props.restaurant.name}</h4>
         <div>
-          <p>Reviews: {props.restaurant.no_of_reviews}</p>
+          <p><FaRegUser /> &nbsp; Reviews: {props.restaurant.no_of_reviews}</p>
           
-          <p>Avg Rating: {props.restaurant.avgRating === null ? 0 : avg}</p>
+          <p><FaRegStar /> &nbsp; Avg Rating: {props.restaurant.avgRating === null ? 0 : avg}</p>
         </div>
         <button>Reserve</button>
       </div>
       <div className="summary">
-        <p>{props.restaurant.name}</p>
-        <p>{props.restaurant.city}</p>
+        <p><FaRegClipboard /> &nbsp; {props.restaurant.name}</p>
+        <p><FaMapMarkerAlt /> &nbsp; {props.restaurant.city}</p>
       </div>
     </RestaurantWrapper>
   );
@@ -64,6 +65,7 @@ const RestaurantWrapper = styled.div`
         color: #4d4f56;
         font-family: "Source Sans Pro", sans-serif;
         margin-right: 3rem;
+        vertical-align: top;
       }
     }
     button {
