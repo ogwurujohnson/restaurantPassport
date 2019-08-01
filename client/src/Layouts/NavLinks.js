@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const token = localStorage.getItem('token');
 export default function NavLinks() {
   return (
     <NavLinkWrapper>

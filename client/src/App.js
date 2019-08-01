@@ -35,6 +35,7 @@ export default App;
 const AppWrapper = styled.div`
   background: #F9F9F9;
   min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;

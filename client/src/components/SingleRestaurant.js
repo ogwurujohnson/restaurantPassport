@@ -88,6 +88,7 @@ const RestaurantWrapper = styled.div`
       font-size: 1.5rem;
       font-weight: 600;
       font-family: "Source Sans Pro", sans-serif;
+      cursor: pointer;
 
       &:hover {
         color: #fafaf8;
