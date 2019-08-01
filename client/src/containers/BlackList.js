@@ -25,9 +25,10 @@ class BlackList extends Component {
   render() {
     return (
       <div>
+        {this.state.blacklists.length === 0 && <p>Nothing here</p> }
         {this.state.blacklists.length !==0 ? this.state.blacklists.map((blacklist) => {
           return <SingleBlacklist key={blacklist.id} blacklist={blacklist} />
-        }) : <p>Nothing here</p>}
+        }) : <p>Loading...</p>}
       </div>
     )
   }

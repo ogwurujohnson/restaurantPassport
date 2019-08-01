@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getCityRestaurant } from "../store/actions/restaurants";
-import {getBlacklists} from '../store/actions/blacklist';
-import {getVisits} from '../store/actions/visits';
 import { baseUrl } from "../utils/url";
 import SingleRestaurant from "../components/SingleRestaurant";
 import headerimg from "../assets/profile-banner.jpg";
 import styled from "styled-components";
+import Visits from './Visits';
+import BlackList from './BlackList';
 
 class Passport extends Component {
   state = {
-    restaurants: []
+    restaurants: [],
   };
   componentWillMount() {
     this.getRestaurant();
@@ -23,6 +23,14 @@ class Passport extends Component {
       this.setState({ restaurants: this.props.restaurants });
     });
   };
+
+  getBlacklists = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const url = `${baseUrl}/blacklists/${user.id}`;
+    await this.props.getBlacklists(url).then(() => {
+      this.setState({ restaurants: this.props.restaurants });
+    });
+  }
 
   render() {
     return (
@@ -56,7 +64,7 @@ class Passport extends Component {
             </div>
             <div className="search aux-title">
               <div>
-                <p>Hello</p>
+                <BlackList />
               </div>
             </div>
             <div className="title">
@@ -64,7 +72,7 @@ class Passport extends Component {
             </div>
             <div className="search aux-title">
               <div>
-                <p>Hello</p>
+                <Visits />
               </div>
             </div>
           </FilterWrapper>
@@ -98,7 +106,7 @@ const mapStateToProps = store => {
 
 export default connect(
   mapStateToProps,
-  { getCityRestaurant, getBlacklists, getVisits }
+  { getCityRestaurant }
 )(Passport);
 
 const Gallery = styled.div`
