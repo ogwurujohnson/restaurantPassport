@@ -8,7 +8,8 @@ import {
   DELETING_BLACKLIST,
   FETCHING_BLACKLIST,
   GET_BLACKLISTS,
-  GET_BLACKLIST_ERROR
+  GET_BLACKLIST_ERROR,
+  NO_AUTH
 } from "./action.types";
 
 export const addToBlacklist = url => dispatch => {
@@ -27,7 +28,11 @@ export const getBlacklists = url => dispatch => {
   return axiosPump()
     .get(url)
     .then(res => {
-      dispatch({ type: GET_BLACKLISTS, payload: res.data, message: 'blacklist fetch success' });
+      if(res.status === 200) {
+        dispatch({ type: GET_BLACKLISTS, payload: res.data, message: 'blacklist fetch success' });
+      } else if(res.status === 401) {
+        dispatch({ type: NO_AUTH })
+      }
     })
     .catch(err => {
       dispatch({ type: GET_BLACKLIST_ERROR, message: 'blacklist fetch failed' });
