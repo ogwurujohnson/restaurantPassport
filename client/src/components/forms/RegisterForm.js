@@ -7,17 +7,25 @@ export default class RegisterForm extends Component {
     lastname: "",
     email: "",
     password: "",
-    retypepassword: '',
-    city: "",
+    retypepassword: "",
+    city: ""
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    this.props.handleSubmit(this.state);
+    await this.props.handleSubmit(this.state);
+    await this.setState({
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      retypepassword: "",
+      city: ""
+    });
   };
 
   render() {
@@ -116,13 +124,13 @@ const FormWrapper = styled.form`
   .inputs {
     display: flex;
     flex-wrap: wrap;
-    margin: 2.0rem auto;
+    margin: 2rem auto;
     div {
       display: flex;
       flex-direction: column;
       margin: 2rem;
       width: 40%;
-      margin-bottom: 3.0rem;
+      margin-bottom: 3rem;
 
       label {
         margin-bottom: 1rem;
