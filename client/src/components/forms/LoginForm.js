@@ -60,7 +60,7 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  margin: 4rem 0rem;
+  margin: 5rem 0rem;
   margin-left: 10em;
   width: 70%;
   height: 60%;

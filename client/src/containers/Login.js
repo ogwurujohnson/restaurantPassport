@@ -60,8 +60,8 @@ const FormPageWrapper = styled.div`
 `;
 
 const DetailsWrapper = styled.div`
-  width: 40%;
-  margin: 4rem 0rem;
+  width: 30%;
+  margin: 3.5rem 0rem;
   margin-right: 10em;
   .intro {
     padding: 2rem;
