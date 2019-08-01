@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import foodimg from "../assets/food1.jpg";
 
+let avg;
 export default function SingleRestaurant(props) {
+  avg = props.restaurant.avgRating ? props.restaurant.avgRating.toFixed(1) : 0
   return (
     <RestaurantWrapper>
       <Link to={`/restaurants/${props.restaurant.id}`}><div className="image">
@@ -13,7 +15,8 @@ export default function SingleRestaurant(props) {
         <h4>{props.restaurant.name}</h4>
         <div>
           <p>Reviews: {props.restaurant.no_of_reviews}</p>
-          <p>Avg Rating: {props.restaurant.avgRating === null & 0}</p>
+          
+          <p>Avg Rating: {props.restaurant.avgRating === null ? 0 : avg}</p>
         </div>
         <button>Reserve</button>
       </div>
