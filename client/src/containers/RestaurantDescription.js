@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getRestaurant } from "../store/actions/restaurants";
-import {} from '../store/actions/blacklist';
-import {} from '../store/actions/visits';
+import { addToBlacklist } from "../store/actions/blacklist";
+import { addToVisits } from "../store/actions/visits";
 import { baseUrl } from "../utils/url";
 import detailimg from "../assets/detail-banner-1.jpg";
 import styled from "styled-components";
@@ -12,11 +12,13 @@ class RestaurantDescription extends Component {
   state = {
     restaurant: {},
     averageRating: "",
-    reviewCount: ""
+    reviewCount: "",
+    userId: ''
   };
 
   async componentDidMount() {
     await this.getRestaurant();
+    const userid = JSON.parse(localStorage.getItem('user')).id;
     const reviewCount = this.state.restaurant.reviews
       ? this.state.restaurant.reviews.length
       : 0;
@@ -31,7 +33,8 @@ class RestaurantDescription extends Component {
     const averageRatings = value.toFixed(1);
     await this.setState({
       averageRating: averageRatings,
-      reviewCount: reviewCount
+      reviewCount: reviewCount,
+      userId: userid
     });
   }
 
@@ -101,8 +104,12 @@ class RestaurantDescription extends Component {
                 <div className="divider" />
                 <div className="action-buttons">
                   <button>Book Now</button>
-                  <button>Blacklist</button>
-                  <button>Mark as Visited</button>
+                  <button onClick={() => {
+                    this.props.addToBlacklist(`${baseUrl}/blacklists/${this.state.userId}/${this.state.restaurant.id}`)
+                  }}>Blacklist</button>
+                  <button onClick={() => {
+                    this.props.addToVisits(`${baseUrl}/visits/${this.state.userId}/${this.state.restaurant.id}`)
+                  }}>Mark as Visited</button>
                 </div>
               </div>
               <div className="about-section">
@@ -156,7 +163,7 @@ const mapStateToProps = store => {
 
 export default connect(
   mapStateToProps,
-  { getRestaurant }
+  { getRestaurant, addToBlacklist, addToVisits }
 )(RestaurantDescription);
 
 const RestaurantDescriptionWrapper = styled.div``;

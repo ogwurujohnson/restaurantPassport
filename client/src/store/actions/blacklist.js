@@ -13,13 +13,16 @@ import {
 } from "./action.types";
 
 export const addToBlacklist = url => dispatch => {
+  dispatch({ type: CREATING_BLACKLIST })
   axiosPump()
     .post(url)
     .then(res => {
       console.log(res);
+      dispatch({ type: CREATE_BLACKLIST, payload: res.data, message: 'blacklisted successful' })
     })
     .catch(err => {
       console.log(err);
+      dispatch({ type: CREATE_BLACKLIST_ERROR, message: 'blacklisting failed' })
     });
 };
 
