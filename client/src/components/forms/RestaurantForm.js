@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import axios from 'axios';
 
 export default class RegisterForm extends Component {
   state = {
@@ -7,23 +8,58 @@ export default class RegisterForm extends Component {
     description: "",
     city: "",
     image:
-      "https://res.cloudinary.com/ogwurujohnson/image/upload/v1561643304/bjc5fbdksvte293pnhdl.jpg"
+      "http://codenpixel.com/demo/foodpicky/images/food2.jpg",
+    uploadingImage: false
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleImageUpload = e => {
+    const file = e.target.files[0];
+    const CLOUDINARY_URL =
+      "https://api.cloudinary.com/v1_1/ogwurujohnson/image/upload";
+    const CLOUDINARY_UPLOAD_PRESET = "zjjd4c1v";
+    this.setState({ uploadingImage: true });
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+    axios
+      .post(CLOUDINARY_URL, formData)
+      .then(res => {
+        if (res.data.secure_url !== "") {
+          const uploadedFileUrl = res.data.secure_url;
+          console.log(uploadedFileUrl);
+          this.setState({
+            image: uploadedFileUrl,
+            uploadingImage: false
+          });
+        } else {
+        }
+      })
+      .catch(err => {});
+  };
+
   handleSubmit = async e => {
     e.preventDefault();
-    await this.props.handleSubmit(this.state);
-    await this.setState({
-      name: "",
-      description: "",
-      city: "",
-      image:
-        "https://res.cloudinary.com/ogwurujohnson/image/upload/v1561643304/bjc5fbdksvte293pnhdl.jpg"
-    });
+    const data = {
+      name: this.state.name,
+      description: this.state.description,
+      city: this.state.city,
+      image: this.state.image
+    }
+    console.log(data);
+    
+    await this.props.handleSubmit(data);
+    // await this.setState({
+    //   name: "",
+    //   description: "",
+    //   city: "",
+    //   image:
+    //     "https://res.cloudinary.com/ogwurujohnson/image/upload/v1561643304/bjc5fbdksvte293pnhdl.jpg"
+    // });
   };
 
   render() {
@@ -61,6 +97,7 @@ export default class RegisterForm extends Component {
                 type="file"
                 name="image"
                 id="image"
+                onChange={this.handleImageUpload}
               />
             </div>
 
@@ -77,7 +114,7 @@ export default class RegisterForm extends Component {
             </div>
           </div>
 
-          <button>Creat Restaurant</button>
+          <button>{this.state.uploadingImage ? "Uploading..." : "Create Restaurant"}</button>
         </FormWrapper>
       </div>
     );
