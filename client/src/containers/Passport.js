@@ -49,6 +49,22 @@ class Passport extends Component {
                 <p>Pizza</p>
               </div>
             </div>
+            <div className="title ">
+              <p>Blacklist</p>
+            </div>
+            <div className="search aux-title">
+              <div>
+                <p>Hello</p>
+              </div>
+            </div>
+            <div className="title">
+              <p>Visits</p>
+            </div>
+            <div className="search aux-title">
+              <div>
+                <p>Hello</p>
+              </div>
+            </div>
           </FilterWrapper>
           <Gallery>
             {this.state.restaurants.length !== 0 ? (
@@ -118,6 +134,16 @@ const FilterWrapper = styled.div`
       font-weight: bold;
       font-family: "Source Sans Pro", sans-serif;
       line-height: 20px;
+    }
+  }
+
+  .aux-title {
+    margin-bottom: 3.0rem;
+    padding: 1.0rem;
+    p {
+      color: #25282b;
+      font-size: 1.4rem;
+      font-weight: 300;
     }
   }
 

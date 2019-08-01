@@ -9,7 +9,7 @@ export default function SingleRestaurant(props) {
   return (
     <RestaurantWrapper>
       <Link to={`/restaurants/${props.restaurant.id}`}><div className="image">
-        <img src={props.restaurant.image} alt="foodimg" />
+        <img src={foodimg} alt="foodimg" />
       </div> </Link>
       <div className="restinfo">
         <h4>{props.restaurant.name}</h4>
@@ -24,8 +24,6 @@ export default function SingleRestaurant(props) {
         <p>{props.restaurant.name}</p>
         <p>{props.restaurant.city}</p>
       </div>
-      {/* <Link to={`/restaurants/${props.restaurant.id}`}><h1>Name: {props.restaurant.name}</h1></Link>
-      <p>Description: {props.restaurant.description}</p> */}
     </RestaurantWrapper>
   );
 }
