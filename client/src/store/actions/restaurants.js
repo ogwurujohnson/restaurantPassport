@@ -11,7 +11,13 @@ import {
   EDIT_RESTAURANT,
   EDIT_RESTAURANT_ERROR,
   FETCHING_RESTAURANT,
-  GET_RESTAURANTS_ERROR
+  GET_RESTAURANTS_ERROR,
+  CREATE_REVIEW,
+  CREATE_ERROR_REVIEW,
+  CREATING_REVIEW,
+  DELETE_ERROR_REVIEW, 
+  DELETE_REVIEW,
+  DELETING_REVIEW
 } from "../actions/action.types";
 
 export const addRestaurant = (url, data) => dispatch => {
@@ -73,13 +79,16 @@ export const editRestaurant = (url, data) => dispatch => {
 };
 
 export const addRestaurantReview = (url, data) => dispatch => {
-  axiosPump()
+  dispatch({ type: CREATING_REVIEW })
+  return axiosPump()
     .post(url, data)
     .then(res => {
       console.log(res);
+      dispatch({ type: CREATING_REVIEW, payload: res.data, message: 'review successful' })
     })
     .catch(err => {
       console.log(err);
+      dispatch({ type: CREATING_REVIEW, message: 'review failed' })
     });
 };
 
