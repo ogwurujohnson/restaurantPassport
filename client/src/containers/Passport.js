@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getCityRestaurant } from "../store/actions/restaurants";
+import {getBlacklists} from '../store/actions/blacklist';
+import {getVisits} from '../store/actions/visits';
 import { baseUrl } from "../utils/url";
 import SingleRestaurant from "../components/SingleRestaurant";
 import headerimg from "../assets/profile-banner.jpg";
@@ -88,13 +90,15 @@ class Passport extends Component {
 
 const mapStateToProps = store => {
   return {
-    restaurants: store.restaurants.restaurants
+    restaurants: store.restaurants.restaurants,
+    blacklists: store.blacklist.blacklists,
+    visits: store.visits.visits
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getCityRestaurant }
+  { getCityRestaurant, getBlacklists, getVisits }
 )(Passport);
 
 const Gallery = styled.div`
