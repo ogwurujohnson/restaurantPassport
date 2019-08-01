@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-export default class RegisterForm extends Component {
+export default class LoginForm extends Component {
   state = {
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-    retypepassword: "",
-    city: ""
-  };
+    email: '',
+    password: '',
+  }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -19,12 +15,8 @@ export default class RegisterForm extends Component {
     e.preventDefault();
     await this.props.handleSubmit(this.state);
     await this.setState({
-      firstname: "",
-      lastname: "",
       email: "",
       password: "",
-      retypepassword: "",
-      city: ""
     });
   };
 
@@ -33,29 +25,6 @@ export default class RegisterForm extends Component {
       <div>
         <FormWrapper onSubmit={this.handleSubmit}>
           <div className="inputs">
-            <div>
-              <label htmlFor="firstname">First Name</label>
-              <input
-                type="text"
-                value={this.state.firstname}
-                onChange={this.handleChange}
-                name="firstname"
-                id="firstname"
-                placeholder="Firstname"
-              />
-            </div>
-            <div>
-              <label htmlFor="lastname">Last Name</label>
-              <input
-                type="text"
-                value={this.state.lastname}
-                onChange={this.handleChange}
-                name="lastname"
-                id="lastname"
-                placeholder="Lastname"
-              />
-            </div>
-
             <div>
               <label htmlFor="email">Email</label>
               <input
@@ -68,18 +37,6 @@ export default class RegisterForm extends Component {
               />
             </div>
             <div>
-              <label htmlFor="city">City</label>
-              <input
-                type="text"
-                value={this.state.city}
-                onChange={this.handleChange}
-                name="city"
-                id="city"
-                placeholder="City"
-              />
-            </div>
-
-            <div>
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -90,20 +47,8 @@ export default class RegisterForm extends Component {
                 placeholder="*****"
               />
             </div>
-            <div>
-              <label htmlFor="retypepassword">Repeat Password</label>
-              <input
-                type="password"
-                value={this.state.retypepassword}
-                onChange={this.handleChange}
-                id="retypepassword"
-                name="retypepassword"
-                placeholder="*****"
-              />
-            </div>
           </div>
-
-          <button>Sign Up</button>
+          <button>Log In</button>
         </FormWrapper>
       </div>
     );
@@ -117,8 +62,8 @@ const FormWrapper = styled.form`
   padding: 2rem;
   margin: 4rem 0rem;
   margin-left: 10em;
-  width: 60%;
-  height: 90%;
+  width: 70%;
+  height: 60%;
   border: 1px solid #eaebeb;
   border-radius: 2px;
 
@@ -130,7 +75,7 @@ const FormWrapper = styled.form`
       display: flex;
       flex-direction: column;
       margin: 2rem;
-      width: 40%;
+      width: 100%;
       margin-bottom: 3rem;
 
       label {
@@ -166,7 +111,7 @@ const FormWrapper = styled.form`
     padding: 1.2rem;
     font-size: 1.4rem;
     font-weight: bold;
-    margin-top: 6rem;
+    margin-top: 2rem;
     cursor: pointer;
   }
 `;
