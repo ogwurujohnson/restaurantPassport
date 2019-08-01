@@ -1,4 +1,5 @@
 import React from "react";
+import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./containers/Login";
 import Register from "./containers/Register";
@@ -6,11 +7,14 @@ import Restaurants from "./containers/Restaurants";
 import Passport from "./containers/Passport";
 import RestaurantDescription from "./containers/RestaurantDescription";
 import newRestaurant from "./containers/newRestaurant";
+import Header from './Layouts/Header';
+import styled from 'styled-components';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <AppWrapper>
+        <Header />
         <Switch>
           <Route
             exact
@@ -28,9 +32,16 @@ function App() {
           <Route path="/restaurants/:id" component={RestaurantDescription} />
           <Route exact path="/passport" component={Passport} />
         </Switch>
-      </div>
+      </AppWrapper>
     </Router>
   );
 }
 
 export default App;
+
+const AppWrapper = styled.div`
+  background: #F9F9F9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
