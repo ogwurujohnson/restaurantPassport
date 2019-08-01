@@ -13,7 +13,7 @@ import {
 
 export const addToVisits = url => dispatch => {
   dispatch({ type: CREATING_VISITS })
-  axiosPump()
+  return axiosPump()
     .post(url)
     .then(res => {
       dispatch({ type: CREATE_VISITS, payload: res.data, message: 'adding to visits successfull' })

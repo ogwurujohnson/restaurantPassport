@@ -14,7 +14,7 @@ import {
 
 export const addToBlacklist = url => dispatch => {
   dispatch({ type: CREATING_BLACKLIST })
-  axiosPump()
+  return axiosPump()
     .post(url)
     .then(res => {
       dispatch({ type: CREATE_BLACKLIST, payload: res.data, message: 'blacklisted successful' })

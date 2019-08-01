@@ -36,6 +36,7 @@ const RestaurantWrapper = styled.div`
   margin-right: 1.5rem;
   margin-left: 1.5rem;
   width: 30%;
+  max-height: 420px;
 
   .image {
     width: 100%;

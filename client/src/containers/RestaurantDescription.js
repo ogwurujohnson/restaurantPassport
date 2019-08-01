@@ -129,7 +129,9 @@ class RestaurantDescription extends Component {
                     this.props.addToBlacklist(`${baseUrl}/blacklists/${this.state.userId}/${this.state.restaurant.id}`)
                   }}>Blacklist</button>
                   <button onClick={() => {
-                    this.props.addToVisits(`${baseUrl}/visits/${this.state.userId}/${this.state.restaurant.id}`)
+                    this.props.addToVisits(`${baseUrl}/visits/${this.state.userId}/${this.state.restaurant.id}`).then(() => {
+                      this.props.history.location.push('/passport');
+                    });
                   }}>Mark as Visited</button>
                 </div>
               </div>
