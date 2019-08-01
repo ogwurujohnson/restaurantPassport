@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getRestaurant } from "../store/actions/restaurants";
+import { getRestaurant, addRestaurantReview } from "../store/actions/restaurants";
 import { addToBlacklist } from "../store/actions/blacklist";
 import { addToVisits } from "../store/actions/visits";
 import { baseUrl } from "../utils/url";
@@ -13,11 +13,21 @@ class RestaurantDescription extends Component {
     restaurant: {},
     averageRating: "",
     reviewCount: "",
-    userId: ''
+    userId: '',
+    rating: '',
+    review: ''
   };
 
   async componentDidMount() {
     await this.getRestaurant();
+  }
+
+  getRestaurant = async () => {
+    const id = this.props.match.params.id;
+    const url = `${baseUrl}/restaurants/${id}`;
+    await this.props.getRestaurant(url).then(() => {
+      this.setState({ restaurant: this.props.restaurants });
+    });
     const userid = JSON.parse(localStorage.getItem('user')).id;
     const reviewCount = this.state.restaurant.reviews
       ? this.state.restaurant.reviews.length
@@ -36,15 +46,26 @@ class RestaurantDescription extends Component {
       reviewCount: reviewCount,
       userId: userid
     });
+  };
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  getRestaurant = async () => {
-    const id = this.props.match.params.id;
-    const url = `${baseUrl}/restaurants/${id}`;
-    await this.props.getRestaurant(url).then(() => {
-      this.setState({ restaurant: this.props.restaurants });
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      ratings: this.state.rating,
+      reviews: this.state.review
+    }
+    const url = `${baseUrl}/reviews/${this.state.userId}/${this.state.restaurant.id}`;
+    this.props.addRestaurantReview(url,data).then(() => {
+      this.getRestaurant();
     });
-  };
+    this.setState({
+      review: ''
+    })
+  }
   render() {
     return (
       <RestaurantDescriptionWrapper>
@@ -131,20 +152,20 @@ class RestaurantDescription extends Component {
           <ReviewSection>
             <h4>Submit a Review</h4>
             <div className="divider" />
-            <FormWrapper>
+            <FormWrapper onSubmit={this.handleSubmit}>
               <div>
                 <label>Rating</label>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                <select name="rating" onChange={this.handleChange}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
                 </select>
               </div>
               <div>
                 <label>Review Description</label>
-                <textarea />
+                <textarea name="review" onChange={this.handleChange} value={this.state.review} />
               </div>
               <button>Submit</button>
             </FormWrapper>
@@ -163,7 +184,7 @@ const mapStateToProps = store => {
 
 export default connect(
   mapStateToProps,
-  { getRestaurant, addToBlacklist, addToVisits }
+  { getRestaurant, addToBlacklist, addToVisits, addRestaurantReview }
 )(RestaurantDescription);
 
 const RestaurantDescriptionWrapper = styled.div``;
