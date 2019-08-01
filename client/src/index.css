@@ -81,9 +81,9 @@ h1, h2, h3, h4, h5, h6 {
 
 a, span, p, input {
   font-family: 'Overpass', sans-serif;
-  font-weight: 300;
-  font-size: 1.8rem;
-  color: #333;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #fff;
   line-height: 1.5;
 }
 

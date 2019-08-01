@@ -7,24 +7,17 @@ import Restaurants from "./containers/Restaurants";
 import Passport from "./containers/Passport";
 import RestaurantDescription from "./containers/RestaurantDescription";
 import newRestaurant from "./containers/newRestaurant";
+import LandingPage from './containers/LandingPage';
 import Header from './Layouts/Header';
 import styled from 'styled-components';
 
-function App() {
+function App(props) {
   return (
     <Router>
       <AppWrapper>
-        <Header />
+        <Header {...props} />
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={() => (
-              <div>
-                <p>Welcome</p>
-              </div>
-            )}
-          />
+          <Route exact path="/" component={LandingPage} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Register} />
           <Route exact path="/restaurants" component={Restaurants} />
@@ -44,4 +37,5 @@ const AppWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
