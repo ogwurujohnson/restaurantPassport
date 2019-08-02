@@ -12,13 +12,14 @@ import {
 } from "./action.types";
 
 export const addToVisits = url => dispatch => {
-  axiosPump()
+  dispatch({ type: CREATING_VISITS })
+  return axiosPump()
     .post(url)
     .then(res => {
-      console.log(res);
+      dispatch({ type: CREATE_VISITS, payload: res.data, message: 'adding to visits successfull' })
     })
     .catch(err => {
-      console.log(err);
+      dispatch({ type: CREATE_VISIT_ERROR, message: 'adding to visits failed' })
     });
 };
 
