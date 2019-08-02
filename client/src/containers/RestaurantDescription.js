@@ -29,7 +29,7 @@ class RestaurantDescription extends Component {
     await this.props.getRestaurant(url).then(() => {
       this.setState({ restaurant: this.props.restaurants });
     });
-    const userid = JSON.parse(localStorage.getItem('user')).id;
+    const userid = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : 0;
     const reviewCount = this.state.restaurant.reviews
       ? this.state.restaurant.reviews.length
       : 0;
@@ -124,6 +124,7 @@ class RestaurantDescription extends Component {
                   </p>
                 </div>
                 <div className="divider" />
+                {localStorage.getItem('token') ? 
                 <div className="action-buttons">
                   <button>Book Now</button>
                   <button onClick={() => {
@@ -136,7 +137,7 @@ class RestaurantDescription extends Component {
                       this.props.history.push('/passport');
                     });
                   }}>Mark as Visited</button>
-                </div>
+                </div> : '' }
               </div>
               <div className="about-section">
                 <div className="title">
@@ -172,7 +173,10 @@ class RestaurantDescription extends Component {
                 <label>Review Description</label>
                 <textarea name="review" onChange={this.handleChange} value={this.state.review} />
               </div>
-              <button>Submit</button>
+              {localStorage.getItem('token') ? 
+                <button>Submit</button> : ''
+              }
+              
             </FormWrapper>
           </ReviewSection>
         </ContentWrapper>

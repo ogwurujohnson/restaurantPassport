@@ -13,7 +13,9 @@ class newRestaurant extends Component {
 
   handleSubmit = data => {
     const url = `${baseUrl}/restaurants`;
-    this.props.addRestaurant(url, data);
+    this.props.addRestaurant(url, data).then(() => {
+      this.props.history.push('/passport')
+    });
   };
 
   render() {

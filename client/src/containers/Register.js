@@ -10,7 +10,7 @@ class Register extends Component {
   handleSubmit = data => {
     const url = `${baseUrl}/auth/register`;
     this.props.register(url, data).then(() => {
-      this.props.history('/login');
+      this.props.history.push('/login');
     });
   };
 

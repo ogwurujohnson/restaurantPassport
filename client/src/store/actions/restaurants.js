@@ -22,7 +22,7 @@ import {
 
 export const addRestaurant = (url, data) => dispatch => {
   dispatch({ type: CREATING_RESTAURANT })
-  axiosPump()
+  return axiosPump()
     .post(url, data)
     .then(res => {
       dispatch({ type: CREATE_RESTAURANT, payload: res.data, message: 'creation successful' })
