@@ -7,6 +7,7 @@ import { baseUrl } from "../utils/url";
 import detailimg from "../assets/detail-banner-1.jpg";
 import styled from "styled-components";
 import intro from "../assets/gallery-1.jpg";
+import { FaHeart, FaRegStar, FaMapMarkerAlt } from "react-icons/fa";
 
 class RestaurantDescription extends Component {
   state = {
@@ -76,8 +77,8 @@ class RestaurantDescription extends Component {
           </div>
           <div className="shopdetails">
             <h1>{this.state.restaurant.name}</h1>
-            <p>Restaurant City Location: {this.state.restaurant.city} </p>
-            <p>Average Rating: {this.state.averageRating}</p>
+            <p> <FaMapMarkerAlt /> &nbsp; Restaurant City Location: {this.state.restaurant.city} </p>
+            <p> <FaRegStar /> &nbsp; Average Rating: {this.state.averageRating}</p>
           </div>
           <div className="actions">
             <button>Bookmark</button>
@@ -115,10 +116,10 @@ class RestaurantDescription extends Component {
               <div className="actions">
                 <div className="rating-info">
                   <p>
-                    <span>213</span> people love it{" "}
+                    <span><FaHeart /> &nbsp; 213</span> people love it{" "}
                   </p>
                   <p>
-                    <span>{this.state.averageRating} / 5.0</span>from{" "}
+                    <span><FaRegStar /> &nbsp; {this.state.averageRating} / 5.0</span>from{" "}
                     {this.state.reviewCount} review(s)
                   </p>
                 </div>
@@ -319,6 +320,7 @@ const LeftSection = styled.div`
             font-weight: 500;
             margin-right: 1rem;
             color: #25282b;
+
           }
           font-size: 1.5rem;
           color: rgba(54, 54, 54, 0.6);
@@ -348,6 +350,10 @@ const RightSection = styled.div`
           color: #25282b;
           font-size: 2.6rem;
           margin-right: 0.5rem;
+
+          svg {
+              color: #f30;
+            }
         }
         color: rgba(54, 54, 54, 0.6);
         font-size: 1.4rem;

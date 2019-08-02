@@ -10,7 +10,7 @@ import {
 
 export const register = (url, credentials) => dispatch => {
   dispatch({ type: CREATING_USER })
-  axios
+  return axios
     .post(url, credentials)
     .then(res => {
       dispatch({ type: CREATE_USER, message: 'signup successful' })
@@ -24,7 +24,7 @@ export const register = (url, credentials) => dispatch => {
 
 export const login = (url, credentials) => dispatch => {
   dispatch({ type: LOGIN_IN })
-  axios
+  return axios
     .post(url, credentials)
     .then(res => {
       dispatch({ type: LOGIN_SUCCESS, message: 'login successful', payload: res.data.token, userdata: res.data.user })

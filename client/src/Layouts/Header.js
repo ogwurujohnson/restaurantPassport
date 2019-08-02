@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
 import img from "../assets/menu-bg.jpg";
-import logo from "../assets/food-picky-logo.png";
+import logo from "../assets/logo.png";
 import NavLinks from "./NavLinks";
 
 export default function Header(props) {

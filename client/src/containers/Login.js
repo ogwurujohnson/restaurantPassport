@@ -18,7 +18,9 @@ class Login extends Component {
 
   handleSubmit = (data) => {
     const url = `${baseUrl}/auth/login`
-    this.props.login(url, data);
+    this.props.login(url, data).then(()=>{
+      this.props.history.push('/passport');
+    });
   }
 
   render() {

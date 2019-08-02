@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FaBan, FaCheckCircle } from "react-icons/fa";
+import { FaBan } from "react-icons/fa";
 
 export default function SingleBlacklist(props) {
   return (
