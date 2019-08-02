@@ -9,7 +9,9 @@ import orderfood from "../assets/bike rider.png";
 class Register extends Component {
   handleSubmit = data => {
     const url = `${baseUrl}/auth/register`;
-    this.props.register(url, data);
+    this.props.register(url, data).then(() => {
+      this.props.history('/login');
+    });
   };
 
   render() {

@@ -127,11 +127,13 @@ class RestaurantDescription extends Component {
                 <div className="action-buttons">
                   <button>Book Now</button>
                   <button onClick={() => {
-                    this.props.addToBlacklist(`${baseUrl}/blacklists/${this.state.userId}/${this.state.restaurant.id}`)
+                    this.props.addToBlacklist(`${baseUrl}/blacklists/${this.state.userId}/${this.state.restaurant.id}`).then(() => {
+                      this.props.history.push('/passport');
+                    })
                   }}>Blacklist</button>
                   <button onClick={() => {
                     this.props.addToVisits(`${baseUrl}/visits/${this.state.userId}/${this.state.restaurant.id}`).then(() => {
-                      this.props.history.location.push('/passport');
+                      this.props.history.push('/passport');
                     });
                   }}>Mark as Visited</button>
                 </div>
