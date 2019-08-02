@@ -10,6 +10,8 @@ import newRestaurant from "./containers/newRestaurant";
 import LandingPage from './containers/LandingPage';
 import Header from './Layouts/Header';
 import styled from 'styled-components';
+import PrivateRoute from './containers/PrivateRoute';
+
 
 function App(props) {
   return (
@@ -21,9 +23,9 @@ function App(props) {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Register} />
           <Route exact path="/restaurants" component={Restaurants} />
-          <Route path="/restaurants/new" component={newRestaurant} />
+          <PrivateRoute path="/restaurants/new" component={newRestaurant} />
           <Route path="/restaurants/:id" component={RestaurantDescription} />
-          <Route exact path="/passport" component={Passport} />
+          <PrivateRoute exact path="/passport" component={Passport} />
         </Switch>
       </AppWrapper>
     </Router>
